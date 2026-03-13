@@ -1,0 +1,379 @@
+/* ================================================
+   PROMPT HUNTER – Premium Dark Navy Design System
+   Layered Cards · Electric Blue · Content-Dense
+   Inspired by: dark navy layered card aesthetic
+   ================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* ── CSS Variables ──────────────────────────────── */
+:root {
+  /* Background layers — the key to the premium look */
+  --bg-base:      #0b0f1e;   /* deepest background */
+  --bg-card:      #141929;   /* card surface — lighter navy */
+  --bg-card-2:    #1a2138;   /* elevated card / hover */
+  --bg-input:     #0f1423;   /* inset surfaces */
+
+  /* Blue gradient — electric, vivid */
+  --blue-1:       #2563eb;
+  --blue-2:       #4f46e5;
+  --blue-light:   #60a5fa;
+  --accent-grad:  linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+  --accent-glow:  rgba(37, 99, 235, 0.40);
+  --accent-soft:  rgba(37, 99, 235, 0.12);
+
+  /* Hero card gradient (product-style full-bleed) */
+  --hero-grad:    linear-gradient(160deg, #1a3a8a 0%, #1e1a4a 55%, #141929 100%);
+
+  /* Status */
+  --success:      #10b981;
+  --success-bg:   rgba(16, 185, 129, 0.12);
+  --error:        #ef4444;
+  --error-bg:     rgba(239, 68, 68, 0.12);
+  --gold:         #f59e0b;
+  --gold-bg:      rgba(245, 158, 11, 0.12);
+  --purple:       #8b5cf6;
+  --purple-bg:    rgba(139, 92, 246, 0.12);
+
+  /* Text */
+  --text-1:       #f1f5f9;   /* primary */
+  --text-2:       #94a3b8;   /* secondary */
+  --text-3:       #475569;   /* muted */
+
+  /* Borders */
+  --border:       rgba(255, 255, 255, 0.07);
+  --border-h:     rgba(255, 255, 255, 0.13);
+
+  /* Radii */
+  --r-sm:   10px;
+  --r-md:   16px;
+  --r-lg:   20px;
+  --r-xl:   28px;
+  --r-pill: 9999px;
+
+  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ── Light Mode override ────────────────────────── */
+body.light-mode {
+  --bg-base: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-2: #e2e8f0;
+  --bg-input: #f8fafc;
+  --text-1: #0f172a;
+  --text-2: #475569;
+  --text-3: #94a3b8;
+  --border: rgba(0,0,0,0.1);
+  --border-h: rgba(0,0,0,0.15);
+}
+
+/* ── Reset ──────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg-base);
+  color: var(--text-1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+button { cursor: pointer; border: none; font-family: var(--font); font-weight: 600; }
+a { color: var(--blue-light); text-decoration: none; }
+
+/* ── App Shell ──────────────────────────────────── */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--bg-base);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle blue radial on the body */
+.app-container::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  max-width: 480px;
+  margin: auto;
+  background:
+    radial-gradient(ellipse 60% 35% at 70% 0%, rgba(37,99,235,0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 20% 100%, rgba(79,70,229,0.10) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Content Area ───────────────────────────────── */
+.content-area {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem 1rem 0;
+  position: relative;
+  z-index: 1;
+  scrollbar-width: none;
+}
+.content-area::-webkit-scrollbar { display: none; }
+
+/* ── Card — the foundation of the layout ───────── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.card:hover {
+  border-color: var(--border-h);
+}
+
+/* Legacy alias */
+.glass-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1.25rem;
+}
+
+/* ── Hero Card — vivid blue gradient fill ───────── */
+.hero-card {
+  background: var(--hero-grad);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  border-radius: var(--r-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.03), transparent);
+  pointer-events: none;
+}
+
+/* ── Typography ─────────────────────────────────── */
+h1 { font-size: 1.85rem; font-weight: 900; letter-spacing: -0.04em; line-height: 1.1; }
+h2 { font-size: 1.3rem;  font-weight: 800; letter-spacing: -0.03em; }
+h3 { font-size: 1rem;    font-weight: 700; }
+
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa 0%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Buttons ────────────────────────────────────── */
+.btn-primary {
+  background: var(--accent-grad);
+  color: #fff;
+  padding: 0.9rem 1.75rem;
+  border-radius: var(--r-pill);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 20px var(--accent-glow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all var(--transition);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 28px var(--accent-glow); }
+.btn-primary:active { transform: scale(0.97); }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.btn-secondary {
+  background: var(--bg-card-2);
+  color: var(--text-1);
+  padding: 0.9rem 1.75rem;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--border-h);
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all var(--transition);
+}
+.btn-secondary:hover { background: #1e2844; border-color: rgba(255,255,255,0.18); }
+
+/* ── Bottom Navigation ──────────────────────────── */
+.bottom-nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.7rem 0.5rem 0.9rem;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-3);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--r-lg);
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative;
+}
+
+.nav-item svg { width: 22px; height: 22px; transition: transform var(--transition); }
+.nav-item:hover { color: var(--text-2); }
+.nav-item:hover svg { transform: scale(1.08); }
+
+.nav-item.active {
+  color: #fff;
+}
+
+/* Active background circle around icon */
+.nav-item.active .nav-icon-wrap {
+  background: var(--accent-grad);
+  box-shadow: 0 4px 16px var(--accent-glow);
+}
+
+.nav-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  margin-bottom: 0.1rem;
+}
+
+/* ── Settings Items ─────────────────────────────── */
+.settings-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  transition: background-color var(--transition);
+}
+.settings-item:hover { background: rgba(255, 255, 255, 0.03); }
+.settings-item:active { background: rgba(255, 255, 255, 0.06); }
+
+/* ── Icon Box (stat / feature icons) ───────────── */
+.icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Progress Bar ───────────────────────────────── */
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.06);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent-grad);
+  border-radius: var(--r-pill);
+  transition: width 1s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* ── Chips ──────────────────────────────────────── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--r-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.chip-blue   { background: var(--accent-soft);  color: var(--blue-light); border: 1px solid rgba(96,165,250,0.2); }
+.chip-green  { background: var(--success-bg);   color: var(--success);    border: 1px solid rgba(16,185,129,0.2); }
+.chip-gold   { background: var(--gold-bg);      color: var(--gold);       border: 1px solid rgba(245,158,11,0.2); }
+
+/* ── Skeleton shimmer ───────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.04) 0%,
+    rgba(255,255,255,0.09) 50%,
+    rgba(255,255,255,0.04) 100%
+  );
+  background-size: 200% 100%;
+  border-radius: 6px;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+/* ── Divider ────────────────────────────────────── */
+.divider { height: 1px; background: var(--border); margin: 0.75rem 0; }
+
+/* ── Utilities ──────────────────────────────────── */
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.text-center { text-align: center; }
+.text-secondary { color: var(--text-2); }
+.mt-2 { margin-top: 0.5rem;  }
+.mt-4 { margin-top: 1rem;    }
+.mt-6 { margin-top: 1.5rem;  }
+.mt-8 { margin-top: 2rem;    }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem;   }
+
+/* ── Keyframes ──────────────────────────────────── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes pulse {
+  0%,100% { transform: scale(1);    opacity: 1;    }
+  50%     { transform: scale(1.05); opacity: 0.75; }
+}
+/* GPU-safe glow-pulse: only scale + opacity — no box-shadow tweening
+   box-shadow causes a repaint on every frame which kills mobile perf */
+@keyframes glow-pulse {
+  0%,100% { transform: scale(1);    opacity: 1;    }
+  50%     { transform: scale(1.04); opacity: 0.88; }
+}
+
+/* Promote animated capture button to its own GPU layer */
+#capture-btn { will-change: transform, opacity; }
+#flash-btn   { will-change: transform; }
+
+/* ── Animation classes ──────────────────────────── */
+.animate-fade-in { animation: fadeSlideUp 0.35s ease forwards; }
+.animate-pulse   { animation: pulse 2s ease-in-out infinite; }
+
+/* ── Reduce motion for users who need it / battery-saving devices ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.1ms !important; }
+}
